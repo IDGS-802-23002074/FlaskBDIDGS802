@@ -1,0 +1,23 @@
+{% extends "layout.html" %} {%block container%} {% import "_macros.html" 
+as macros %}
+
+<form class="max-w-sm mx-auto space-y-4">
+    <div>
+        <label for="visitors" class="block mb-2.5 text-sm font-medium text-heading">ID</label>
+        <input type="text" id="id" class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-2.5 py-2 shadow-xs placeholder:text-body" placeholder="" required />
+    </div>
+    <div>
+        <label for="visitors" class="block mb-2.5 text-sm font-medium text-heading">Nombre</label>
+        <input type="text" id="nombre" class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body" placeholder="" required />
+    </div>
+    <div>
+        <label for="visitors" class="block mb-2.5 text-sm font-medium text-heading">Apellido Paterno</label>
+        <input type="text" id="apaterno" class="bg-neutral-secondary-medium border border-default-medium text-heading text-base rounded-base focus:ring-brand focus:border-brand block w-full px-3.5 py-3 shadow-xs placeholder:text-body" placeholder="" required />
+    </div>
+    <div>
+        <label for="visitors" class="block mb-2.5 text-sm font-medium text-heading">Email</label>
+        <input type="text" id="email" class="bg-neutral-secondary-medium border border-default-medium text-heading text-base rounded-base focus:ring-brand focus:border-brand block w-full px-4 py-3.5 shadow-xs placeholder:text-body" placeholder="" required />
+    </div>
+</form>
+
+{%endblock%}
