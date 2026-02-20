@@ -1,7 +1,8 @@
-from wtforms import Form, StringField, EmailField
+from flask_wtf import FlaskForm
+from wtforms import StringField, EmailField
 from wtforms import validators
 
-class UserForm(Form):
+class UserForm(FlaskForm):
 
     nombre = StringField('Nombre', [
         validators.DataRequired(message="El campo nombre es requerido"),
