@@ -3,11 +3,15 @@ from flask_wtf.csrf import CSRFProtect
 from config import DevelopmentConfig
 import forms
 from models import db, Alumno
+from flask_migrate import Migrate
 
 app = Flask(__name__)
 app.config.from_object(DevelopmentConfig)
 
 db.init_app(app)
+
+migrate = Migrate(app, db) 
+
 csrf = CSRFProtect(app)
 
 
@@ -31,13 +35,16 @@ def index():
     return render_template("index.html", form=create_form, alumnos=alumnos)
 
 
-@app.route("/eliminar/<int:id>")
+@app.route("/eliminar/<int:id>", methods=["GET", "POST"])
 def eliminar(id):
     alumno = Alumno.query.get_or_404(id)
-    db.session.delete(alumno)
-    db.session.commit()
-    flash("Alumno eliminado correctamente")
-    return redirect(url_for('index'))
+
+    if request.method == "POST":
+        db.session.delete(alumno)
+        db.session.commit()
+        return redirect(url_for("index"))
+
+    return render_template("eliminar.html", alumno=alumno)
 
 
 @app.errorhandler(404)

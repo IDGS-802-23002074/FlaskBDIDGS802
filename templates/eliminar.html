@@ -1,0 +1,40 @@
+{% extends "layout.html" %}
+{% block container %}
+
+<div class="max-w-xl mx-auto mt-16 bg-white shadow-xl rounded-2xl p-8">
+
+    <h2 class="text-2xl font-bold text-gray-700 mb-6">
+        🗑 Confirmar Eliminación
+    </h2>
+
+    <p class="mb-4 text-gray-600">
+        Estás a punto de eliminar el siguiente registro:
+    </p>
+
+    <div class="bg-gray-100 p-4 rounded-lg mb-6">
+        <p><strong>ID:</strong> {{ alumno.id }}</p>
+        <p><strong>Nombre:</strong> {{ alumno.nombre }}</p>
+        <p><strong>Apellido:</strong> {{ alumno.apaterno }}</p>
+        <p><strong>Email:</strong> {{ alumno.email }}</p>
+        <p><strong>Fecha de registro:</strong> {{ alumno.fecha }}</p>
+    </div>
+
+    <form method="POST">
+        <div class="flex justify-between">
+
+            <button type="submit"
+                class="bg-red-500 hover:bg-red-600 text-white px-6 py-2 rounded-lg shadow-md">
+                Sí, eliminar
+            </button>
+
+            <a href="{{ url_for('index') }}"
+               class="bg-gray-400 hover:bg-gray-500 text-white px-6 py-2 rounded-lg shadow-md">
+                Cancelar
+            </a>
+
+        </div>
+    </form>
+
+</div>
+
+{% endblock %}
