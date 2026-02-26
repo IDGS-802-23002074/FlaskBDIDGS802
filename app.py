@@ -23,8 +23,9 @@ def index():
     if request.method == 'POST' and create_form.validate():
         alumno = Alumno(
             nombre=create_form.nombre.data,
-            apaterno=create_form.apaterno.data,
-            email=create_form.email.data
+            apellidos=create_form.apellidos.data,
+            email=create_form.email.data,
+            telefono=create_form.telefono.data
         )
         db.session.add(alumno)
         db.session.commit()
@@ -58,8 +59,9 @@ def alumnos():
     if request.method == 'POST' and form.validate():
         nuevo = Alumno(
             nombre=form.nombre.data,
-            apaterno=form.apaterno.data,
-            email=form.email.data
+            apellidos=form.apellidos.data,
+            email=form.email.data,
+            telefono=form.telefono.data
         )
         db.session.add(nuevo)
         db.session.commit()
@@ -79,8 +81,9 @@ def editar(id):
 
     if form.validate_on_submit():
         alumno.nombre = form.nombre.data
-        alumno.apaterno = form.apaterno.data
+        alumno.apellidos = form.apellidos.data
         alumno.email = form.email.data
+        alumno.telefono = form.telefono.data
 
         db.session.commit()
         return redirect(url_for('index'))

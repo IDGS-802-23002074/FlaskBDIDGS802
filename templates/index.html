@@ -32,8 +32,9 @@ as macros %}
                     <tr>
                         <th class="px-6 py-3 text-left">ID</th>
                         <th class="px-6 py-3 text-left">Nombre</th>
-                        <th class="px-6 py-3 text-left">Apellido</th>
+                        <th class="px-6 py-3 text-left">Apellidos</th>
                         <th class="px-6 py-3 text-left">Email</th>
+                        <th class="px-6 py-3 text-left">Telefono</th>
                         <th class="px-6 py-3 text-left">Fecha</th>
                         <th class="px-6 py-3 text-center">Acciones</th>
                     </tr>
@@ -52,11 +53,15 @@ as macros %}
                         </td>
 
                         <td class="px-6 py-4">
-                            {{ alumno.apaterno }}
+                            {{ alumno.apellidos }}
                         </td>
 
                         <td class="px-6 py-4">
                             {{ alumno.email }}
+                        </td>
+
+                        <td class="px-6 py-4">
+                            {{ alumno.telefono }}
                         </td>
 
                         <td class="px-6 py-4">
