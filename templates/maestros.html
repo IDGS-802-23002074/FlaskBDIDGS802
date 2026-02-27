@@ -1,0 +1,100 @@
+{% extends "layout.html" %} {%block container%} {% import "_macros.html" 
+as macros %}
+
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Maestros</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-100">
+
+<div class="max-w-6xl mx-auto mt-10">
+
+    <div class="bg-white shadow-xl rounded-2xl overflow-hidden">
+
+    <div class="flex justify-between items-center mb-4">
+        <h2 class="text-2xl font-bold text-gray-700">📚 Lista de Maestros</h2>
+    
+        <a href="{{ url_for('maestros.agregar') }}"
+            class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg shadow-md transition font-semibold">
+            ➕ Nuevo Maestro
+        </a>
+    </div>
+
+        <div class="overflow-x-auto">
+            <table class="min-w-full text-sm text-gray-700">
+                
+                <thead class="bg-gray-100 text-gray-600 uppercase text-xs tracking-wider">
+                    <tr>
+                        <th class="px-6 py-3 text-left">Matricula</th>
+                        <th class="px-6 py-3 text-left">Nombre</th>
+                        <th class="px-6 py-3 text-left">Apellidos</th>
+                        <th class="px-6 py-3 text-left">Especialidad</th>
+                        <th class="px-6 py-3 text-left">Email</th>
+                        <th class="px-6 py-3 text-center">Acciones</th>
+                    </tr>
+                </thead>
+
+                <tbody class="divide-y divide-gray-200">
+                    {% for maestro in maestros %}
+                    <tr class="hover:bg-gray-50 transition duration-200">
+                        
+                        <td class="px-6 py-4 font-medium text-gray-900">
+                            {{ maestro.matricula }}
+                        </td>
+
+                        <td class="px-6 py-4">
+                            {{ maestro.nombre }}
+                        </td>
+
+                        <td class="px-6 py-4">
+                            {{ maestro.apellidos }}
+                        </td>
+
+                        <td class="px-6 py-4">
+                            {{ maestro.especialidad }}
+                        </td>
+
+                        <td class="px-6 py-4">
+                            {{ maestro.email }}
+                        </td>
+
+                        <td class="px-6 py-4 text-center space-x-2">
+
+                            <a href="{{ url_for('maestros.editar', matricula=maestro.matricula) }}"
+                               class="inline-block bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg text-xs font-semibold shadow-md transition">
+                                Editar
+                            </a>
+
+                            <a href="{{ url_for('maestros.detalles', matricula=maestro.matricula) }}"
+                               class="inline-block bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-lg text-xs font-semibold shadow-md transition">
+                               Detalles
+                            </a>
+
+                            <a href="{{ url_for('maestros.eliminar', matricula=maestro.matricula) }}"
+                               class="inline-block bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg text-xs font-semibold shadow-md transition">
+                                Eliminar
+                            </a>
+
+                        </td>
+
+                    </tr>
+                    {% endfor %}
+                </tbody>
+
+            </table>
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>
+
+
+{%endblock%}

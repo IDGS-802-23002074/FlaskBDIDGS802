@@ -4,10 +4,11 @@ from config import DevelopmentConfig
 import forms
 from models import db, Alumno
 from flask_migrate import Migrate
+from maestros import maestros_bp
 
 app = Flask(__name__)
 app.config.from_object(DevelopmentConfig)
-
+app.register_blueprint(maestros_bp)
 db.init_app(app)
 
 migrate = Migrate(app, db) 

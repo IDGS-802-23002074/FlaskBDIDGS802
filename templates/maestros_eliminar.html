@@ -20,12 +20,11 @@
     </p>
 
     <div class="bg-gray-100 p-4 rounded-lg mb-6">
-        <p><strong>ID:</strong> {{ alumno.id }}</p>
-        <p><strong>Nombre:</strong> {{ alumno.nombre }}</p>
-        <p><strong>Apellidos:</strong> {{ alumno.apellidos }}</p>
-        <p><strong>Email:</strong> {{ alumno.email }}</p>
-        <p><strong>Telefono:</strong> {{ alumno.telefono }}</p>
-        <p><strong>Fecha de registro:</strong> {{ alumno.fecha }}</p>
+        <p><strong>Matricula:</strong> {{ maestro.matricula }}</p>
+        <p><strong>Nombre:</strong> {{ maestro.nombre }}</p>
+        <p><strong>Apellidos:</strong> {{ maestro.apellidos }}</p>
+        <p><strong>Especialidad:</strong> {{ maestro.especialidad }}</p>
+        <p><strong>Email:</strong> {{ maestro.email }}</p>
     </div>
 
     <form method="POST">
@@ -36,7 +35,7 @@
                 Sí, eliminar
             </button>
 
-            <a href="{{ url_for('index') }}"
+            <a href="{{ url_for('maestros.index') }}"
                class="bg-gray-400 hover:bg-gray-500 text-white px-6 py-2 rounded-lg shadow-md">
                 Cancelar
             </a>

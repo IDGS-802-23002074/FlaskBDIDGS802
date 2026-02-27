@@ -1,0 +1,62 @@
+{% extends "layout.html" %} {%block container%} {% import "_macros.html" 
+as macros %}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Detalles del Maestro</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-100">
+
+<div class="max-w-xl mx-auto mt-16 bg-white shadow-xl rounded-2xl p-8">
+
+    <h2 class="text-2xl font-bold text-gray-700 mb-6">
+        👁 Detalles del Maestro
+    </h2>
+
+    <div class="space-y-4 text-gray-700">
+
+        <div>
+            <span class="font-semibold">Matricula:</span>
+            {{ maestro.matricula }}
+        </div>
+
+        <div>
+            <span class="font-semibold">Nombre:</span>
+            {{ maestro.nombre }}
+        </div>
+
+        <div>
+            <span class="font-semibold">Apellido:</span>
+            {{ maestro.apellidos }}
+        </div>
+
+        <div>
+            <span class="font-semibold">Especialidad:</span>
+            {{ maestro.especialidad }}
+        </div>
+
+        <div>
+            <span class="font-semibold">Email:</span>
+            {{ maestro.email }}
+        </div>
+
+    </div>
+
+    <div class="mt-8">
+        <a href="{{ url_for('maestros.index') }}"
+           class="bg-blue-500 hover:bg-blue-600 text-white px-6 py-2 rounded-lg shadow-md transition">
+            ⬅ Regresar
+        </a>
+    </div>
+
+</div>
+
+</body>
+</html>
+
+
+{%endblock%}
