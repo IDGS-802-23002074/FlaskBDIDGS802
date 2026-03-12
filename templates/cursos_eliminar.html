@@ -1,0 +1,58 @@
+{% extends "layout.html" %}
+{% block container %}
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Cursos</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-100">
+    <div class="max-w-xl mx-auto mt-16 bg-white shadow-xl rounded-2xl p-8">
+
+        <h2 class="text-2xl font-bold text-gray-700 mb-6">
+            🗑 Confirmar Eliminación
+        </h2>
+
+        <p class="mb-4 text-gray-600">
+            Estás a punto de eliminar el siguiente curso:
+        </p>
+
+        <div class="bg-gray-100 p-4 rounded-lg mb-6">
+
+            <p><strong>ID:</strong> {{ curso.id }}</p>
+            <p><strong>Nombre:</strong> {{ curso.nombre }}</p>
+            <p><strong>Descripción:</strong> {{ curso.descripcion }}</p>
+            <p><strong>Maestro:</strong> {{ curso.maestro.nombre }} {{ curso.maestro.apellidos }}</p>
+
+        </div>
+
+        <form method="POST">
+            {{ form.hidden_tag() }}
+
+            <div class="flex justify-between">
+
+                <button type="submit" class="bg-red-500 hover:bg-red-600 text-white px-6 py-2 rounded-lg">
+
+                    Sí, eliminar
+
+                </button>
+
+                <a href="{{ url_for('cursos.index') }}"
+                    class="bg-gray-400 hover:bg-gray-500 text-white px-6 py-2 rounded-lg">
+
+                    Cancelar
+
+                </a>
+
+            </div>
+
+        </form>
+
+    </div>
+</body>
+
+</html>
+{% endblock %}

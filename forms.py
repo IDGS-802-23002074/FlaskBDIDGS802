@@ -1,5 +1,6 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, EmailField
+from wtforms import StringField, EmailField, SelectField
+from wtforms import IntegerField, SubmitField, TextAreaField
 from wtforms import validators
 
 class UserForm(FlaskForm):
@@ -47,3 +48,25 @@ class UserForm2(FlaskForm):
         validators.Email(message="Ingrese un correo válido"),
         validators.Length(max=50, message="Máximo 50 caracteres")
     ])
+
+class UserForm3(FlaskForm):
+
+    nombre = StringField('Nombre del Curso', [
+        validators.DataRequired(message="El nombre del curso es requerido"),
+        validators.Length(min=3, max=150, message="Debe tener entre 3 y 150 caracteres")
+    ])
+
+    descripcion = TextAreaField('Descripción', [
+        validators.Optional(),
+        validators.Length(max=500, message="Máximo 500 caracteres")
+    ])
+
+    maestro_id = SelectField(
+        'Maestro',
+        coerce=int,
+        validators=[
+            validators.DataRequired(message="Debe seleccionar un maestro")
+        ])
+
+class DeleteForm(FlaskForm):
+    submit = SubmitField("Eliminar")

@@ -1,9 +1,9 @@
 from flask import Blueprint
 
-maestros_bp = Blueprint(
-    'maestros',
+cursos_bp = Blueprint(
+    'cursos',
     __name__,
     template_folder='templates'
 )
 
-from . import m_routes
+from . import c_routes

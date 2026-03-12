@@ -3,7 +3,7 @@ maestros_bp=Blueprint('maestros',__name__)
 
 from flask import render_template, request, redirect, url_for, flash
 from . import maestros_bp
-from models import db, Maestros
+from models import db, Maestro
 import forms
 
 @maestros_bp.route("/maestros", methods=["GET", "POST"])
@@ -11,7 +11,7 @@ def index():
     form = forms.UserForm2(request.form)
 
     if request.method == "POST" and form.validate():
-        nuevo = Maestros(
+        nuevo = Maestro(
             nombre=form.nombre.data,
             apellidos=form.apellidos.data,
             especialidad=form.especialidad.data,
@@ -19,10 +19,10 @@ def index():
         )
         db.session.add(nuevo)
         db.session.commit()
-        flash("Maestro agregado correctamente")
+        
         return redirect(url_for("maestros.index"))
 
-    maestros = Maestros.query.all()
+    maestros = Maestro.query.all()
     return render_template("maestros.html", form=form, maestros=maestros)
 
 @maestros_bp.route("/maestros/agregar", methods=["GET", "POST"])
@@ -30,7 +30,7 @@ def agregar():
     form = forms.UserForm2()
 
     if form.validate_on_submit():
-        nuevo = Maestros(
+        nuevo = Maestro(
             nombre=form.nombre.data,
             apellidos=form.apellidos.data,
             especialidad=form.especialidad.data,
@@ -44,12 +44,12 @@ def agregar():
 
 @maestros_bp.route("/maestros/detalles/<int:matricula>")
 def detalles(matricula):
-    maestro = Maestros.query.get_or_404(matricula)
+    maestro = Maestro.query.get_or_404(matricula)
     return render_template("maestros_detalles.html", maestro=maestro)
 
 @maestros_bp.route("/maestros/editar/<int:matricula>", methods=["GET", "POST"])
 def editar(matricula):
-    maestro = Maestros.query.get_or_404(matricula)
+    maestro = Maestro.query.get_or_404(matricula)
     form = forms.UserForm2(obj=maestro)
 
     if form.validate_on_submit():
@@ -65,11 +65,20 @@ def editar(matricula):
 
 @maestros_bp.route("/maestros/eliminar/<int:matricula>", methods=["GET", "POST"])
 def eliminar(matricula):
-    maestro = Maestros.query.get_or_404(matricula)
+
+    maestro = Maestro.query.get_or_404(matricula)
+    form = forms.UserForm()
 
     if request.method == "POST":
+
         db.session.delete(maestro)
         db.session.commit()
+
+
         return redirect(url_for("maestros.index"))
 
-    return render_template("maestros_eliminar.html", maestro=maestro)
+    return render_template(
+        "maestros_eliminar.html",
+        maestro=maestro,
+        form=form
+    )

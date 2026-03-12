@@ -1,3 +1,4 @@
+"""
 from flask import Flask, render_template, request, redirect, url_for, flash
 from flask_wtf.csrf import CSRFProtect
 from config import DevelopmentConfig
@@ -92,6 +93,38 @@ def editar(id):
     return render_template("editar.html", form=form)
 
 if __name__ == '__main__':
+    with app.app_context():
+        db.create_all()
+    app.run(debug=True)
+"""
+
+from flask import Flask, render_template
+from flask_wtf.csrf import CSRFProtect
+from config import DevelopmentConfig
+from models import db
+from alumnos import alumnos_bp
+from maestros import maestros_bp
+from cursos import cursos_bp
+from inscripciones import inscripciones_bp
+
+app = Flask(__name__)
+app.config.from_object(DevelopmentConfig)
+
+db.init_app(app)
+csrf = CSRFProtect(app)
+
+app.register_blueprint(alumnos_bp)
+app.register_blueprint(maestros_bp)
+app.register_blueprint(cursos_bp)
+app.register_blueprint(inscripciones_bp)
+
+
+@app.route("/")
+def index():
+    return render_template("index.html")
+
+
+if __name__ == "__main__":
     with app.app_context():
         db.create_all()
     app.run(debug=True)

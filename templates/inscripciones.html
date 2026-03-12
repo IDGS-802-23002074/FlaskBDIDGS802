@@ -1,0 +1,105 @@
+{% extends "layout.html" %}
+{% block container %}
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Inscripciones</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-100">
+
+    <div class="max-w-6xl mx-auto mt-10 bg-white shadow-xl rounded-2xl p-8">
+
+        <div class="flex justify-between items-center mb-6">
+
+            <h2 class="text-2xl font-bold text-gray-700">
+                📝 Lista de Inscripciones
+            </h2>
+
+            <a href="{{ url_for('inscripciones.agregar') }}"
+                class="bg-green-500 hover:bg-green-600 text-white px-5 py-2 rounded-lg shadow-md">
+                ➕ Agregar Inscripción
+            </a>
+
+        </div>
+
+        <table class="min-w-full bg-white border border-gray-200 rounded-lg overflow-hidden">
+
+            <thead class="bg-gray-100">
+                <tr>
+                    <th class="py-3 px-4 text-left">ID</th>
+                    <th class="py-3 px-4 text-left">Alumno</th>
+                    <th class="py-3 px-4 text-left">Curso</th>
+                    <th class="py-3 px-4 text-left">Fecha</th>
+                    <th class="py-3 px-4 text-center">Acciones</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                {% for ins in inscripciones %}
+
+                <tr class="border-t hover:bg-gray-50">
+
+                    <td class="py-3 px-4">
+                        {{ ins.id }}
+                    </td>
+
+                    <td class="py-3 px-4">
+
+                        {% for alumno in alumnos %}
+                        {% if alumno.id == ins.alumno_id %}
+                        {{ alumno.nombre }} {{ alumno.apellidos }}
+                        {% endif %}
+                        {% endfor %}
+
+                    </td>
+
+                    <td class="py-3 px-4">
+
+                        {% for curso in cursos %}
+                        {% if curso.id == ins.curso_id %}
+                        {{ curso.nombre }}
+                        {% endif %}
+                        {% endfor %}
+
+                    </td>
+
+                    <td class="py-3 px-4">
+                        {{ ins.fecha_inscripcion }}
+                    </td>
+
+                    <td class="py-3 px-4 text-center space-x-2">
+
+                        <form method="POST" action="{{ url_for('inscripciones.eliminar') }}" class="inline">
+
+                            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                            <input type="hidden" name="alumno_id" value="{{ ins.alumno_id }}">
+                            <input type="hidden" name="curso_id" value="{{ ins.curso_id }}">
+
+                            <button
+                                class="inline-block bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg text-xs font-semibold shadow-md transition">
+                                Eliminar
+                            </button>
+
+                        </form>
+
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</body>
+
+</html>
+{% endblock %}
